@@ -1,0 +1,21 @@
+{
+  "name": "nyc-traffic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "csv-parse": "^0.1.2",
+    "express": "^4.12.4",
+    "lodash": "^3.9.3",
+    "moment": "^2.10.3",
+    "moment-timezone": "^0.4.0",
+    "redis": "^0.12.1",
+    "request": "^2.57.0"
+  }
+}
