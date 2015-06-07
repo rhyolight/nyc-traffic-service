@@ -1,0 +1,11 @@
+    <footer>
+        This site was built on {{ date }} on a <a href="http://heroku.com">Heroku</a> server running <a href="http://nodejs.org">Node.js</a>.
+    </footer>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{{baseurl}}/js/bootstrap.min.js"></script>
+    <script src="http://dygraphs.com/dygraph-combined.js"></script>
+  </body>
+</html>

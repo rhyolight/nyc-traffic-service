@@ -1,6 +1,7 @@
 var express = require('express')
   , fetcher = require('./lib/fetcher')
   , writer = require('./lib/writer')
+  , buildStaticSite = require('./lib/smithy')
   , dataServiceInitializer = require('./lib/data')
   , app = express()
   , port = process.env.PORT || 8080
@@ -45,6 +46,8 @@ dataServiceInitializer(function(connectionError, requestHandler) {
         console.log(connectionError);
         process.exit(-1);
     }
+    buildStaticSite();
+    app.use(express.static('build'));
     app.use('/:trafficRoute', requestHandler);
     app.listen(port, function(error) {
         if (error) return console.error(error);
