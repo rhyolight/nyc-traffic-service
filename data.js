@@ -87,4 +87,5 @@ function initialize(callback) {
     });
 }
 
+// This service queries redis for traffic data in response to HTTP requests.
 module.exports = initialize;

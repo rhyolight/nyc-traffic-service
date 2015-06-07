@@ -4,20 +4,23 @@ var express = require('express')
   , dataServiceInitializer = require('./data')
   , app = express()
   , port = process.env.PORT || 8080
+  , host = process.env.BASE_URI || 'http://localhost'
   ;
 
+// We initialize the redis writer first.
 writer.initialize(function(connectionError) {
     if (connectionError) {
         console.log(connectionError);
         process.exit(-1);
     }
+    // The callback sent to the fetcher will be called every minute with new data
+    // that needs to be stored in redis by the writer initialized above.
     fetcher(function(fetchError, data) {
-        // This is called every minute with new data.
         if (fetchError) {
             console.error('Error fetching new data:');
             console.error(fetchError);
         } else {
-            console.log('Got new data...');
+            // Writes new traffic data to redis.
             writer.write(data, function(writeError) {
                 if (writeError) {
                     console.error('Error writing new data:');
@@ -30,6 +33,8 @@ writer.initialize(function(connectionError) {
     });
 });
 
+// The data service exposes HTTP endpoints so users can query the traffic data
+// stored in redis by the fetcher and writer above.
 dataServiceInitializer(function(connectionError, requestHandler) {
     if (connectionError) {
         console.log(connectionError);
@@ -38,6 +43,6 @@ dataServiceInitializer(function(connectionError, requestHandler) {
     app.use('/:trafficRoute', requestHandler);
     app.listen(port, function(error) {
         if (error) return console.error(error);
-        console.log('http://localhost:%s', port);
+        console.log('%s:%s', host, port);
     });
 });
