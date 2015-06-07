@@ -95,3 +95,6 @@ You may use the URL parameters `since` and `until`, providing a [UNIX timestamp]
 
     /1?since=1420099200&until=1425196800
 
+## Charts
+
+You can view charts of the data that's been stored so far at `/`.
