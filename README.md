@@ -1,5 +1,9 @@
 # NYC Traffic Service
 
+Stores and provides historical traffic data from the NYC DOT, making it available over HTTP.
+
+![NYC Live Traffic Map](images/traffic_map.png)
+
 The New York City Department of Transportation provides [data services](http://www.nyc.gov/html/dot/html/about/datafeeds.shtml#realtime) for retrieving live traffic data about certain common transportation paths in and around NYC. (You can currently download this data [here](http://207.251.86.229/nyc-links-cams/LinkSpeedQuery.txt) as a tab-delimited CSV file.) This service does not contain any historic traffic data, but a snapshot in time, which is usually updated every minute or so.
 
 This Node.js application queries this data very minute and stores it in a Redis. It also exposes some simple HTTP endpoints for retrieving the stored historical data. 
