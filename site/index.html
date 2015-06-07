@@ -4,25 +4,47 @@ template: main.hbt
 class: traffic
 ---
 
-<div id="traffic-chart"></div>
-
 <script type="text/javascript">
     $(function() {
+
+        var $body = $('div#main')
+          , allPathData = {};
 
         function dataToCsv(data) {
             var out = '';
             data.path.forEach(function(path) {
-                // "DataAsOf":"6/5/2015 20:30:00",
-                // "TravelTime":348,
-                out += path.DataAsOf + ',' + path.TravelTime + '\n';
+                out += path.DataAsOf + ',' + path.Speed + '\n';
             });
             return out;
         }
 
-        $.getJSON('/1', function(data) {
-            console.log(data);
-            var csv = dataToCsv(data);
-            new Dygraph(document.getElementById("traffic-chart"), csv);
+        $.getJSON('/paths', function(data) {
+            var pathFetchers = {};
+            _.each(data.pathIds, function(id) {
+                pathFetchers[id] = function(localCallback) {
+                    $.getJSON('/' + id, function(pathData) {
+                        allPathData[id] = pathData;
+                        localCallback();
+                    });
+                };
+            });
+            async.parallel(pathFetchers, function(error) {
+                _.each(allPathData, function(data, id) {
+                    var csv = dataToCsv(data)
+                      , onePoint = data.path[0]
+                      , elId = 'traffic-path-' + id;
+                    $body.append('<div id="' + elId + '"></div>');
+                    new Dygraph(document.getElementById(elId), csv, {
+                        title: onePoint.linkName + ' (' + onePoint.Borough + ')'
+                      , ylabel: 'Speed'
+                      , xlabel: 'Time'
+                      , width: 800
+                    });
+                });
+
+            });
         });
+
+
     });
 </script>

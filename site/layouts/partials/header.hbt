@@ -25,9 +25,12 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{{baseurl}}/js/bootstrap.min.js"></script>
     <script src="{{baseurl}}/lodash.min.js"></script>
+    <script src="{{baseurl}}/async.js"></script>
     <script src="http://dygraphs.com/dygraph-combined.js"></script>
 
 
 
   </head>
   <body>
+
+  <div id="main">

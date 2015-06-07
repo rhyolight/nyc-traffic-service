@@ -1,3 +1,5 @@
+    </div>
+
     <footer>
         This site was built on {{ date }} on a <a href="http://heroku.com">Heroku</a> server running <a href="http://nodejs.org">Node.js</a>.
     </footer>
