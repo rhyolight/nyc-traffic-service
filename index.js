@@ -7,6 +7,11 @@ var express = require('express')
   , host = process.env.BASE_URI || 'http://localhost'
   ;
 
+// Fail fast.
+if (! process.env.REDIS_URL) {
+    throw new Error('Missing environment variable REDIS_URL.');
+}
+
 // We initialize the redis writer first.
 writer.initialize(function(connectionError) {
     if (connectionError) {
@@ -17,16 +22,16 @@ writer.initialize(function(connectionError) {
     // that needs to be stored in redis by the writer initialized above.
     fetcher(function(fetchError, data) {
         if (fetchError) {
-            console.error('Error fetching new data:');
+            console.error('Error fetching new traffic data:');
             console.error(fetchError);
         } else {
             // Writes new traffic data to redis.
             writer.write(data, function(writeError) {
                 if (writeError) {
-                    console.error('Error writing new data:');
+                    console.error('Error writing new traffic data:');
                     console.error(writeError);
                 } else {
-                    console.log('Wrote new path data.');
+                    console.log('Wrote new traffic data.');
                 }
             });
         }
