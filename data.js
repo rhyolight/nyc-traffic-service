@@ -14,11 +14,11 @@ function isInt(value) {
         && ! isNaN(parseInt(value, 10));
 }
 
-function writeKeys(res) {
+function writeKeys(query, res) {
     client.keys('*', function(error, keys) {
         var intKeys;
         if (error) {
-            jsonUtils.renderErrors([error], res);
+            jsonUtils.renderErrors([error], res, query.callback);
         } else {
             intKeys = _.map(keys, function(id) {
                 return parseInt(id);
@@ -26,7 +26,7 @@ function writeKeys(res) {
             jsonUtils.render({
                 pathIds: intKeys
               , count: intKeys.length
-            }, res);
+            }, res, query.callback);
         }
     });
 }
@@ -41,14 +41,14 @@ function writeRouteData(id, query, res) {
             return JSON.parse(value);
         });
         if (error) {
-            jsonUtils.renderErrors([error], res);
+            jsonUtils.renderErrors([error], res, query.callback);
         } else if (! values.length) {
             res.status(404).send('Not found');
         } else {
             jsonUtils.render({
                 path: data
               , count: data.length
-            }, res);
+            }, res, query.callback);
         }
     });
 }
@@ -56,12 +56,13 @@ function writeRouteData(id, query, res) {
 function trafficData(req, res) {
     var trafficRouteId
       , requestUrl = url.parse(req.url)
-      , query = qs.parse(requestUrl.query);
+      , query = qs.parse(requestUrl.query)
+      ;
     
     if (! req.params || ! req.params.trafficRoute) {
         res.status(404).send('Not found');
     } else if (req.params.trafficRoute == 'paths') {
-        writeKeys(res);
+        writeKeys(query, res);
     } else if (isInt(req.params.trafficRoute)) {
         trafficRouteId = parseInt(req.params.trafficRoute);
         writeRouteData(trafficRouteId, query, res);
