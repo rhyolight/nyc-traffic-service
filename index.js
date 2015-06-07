@@ -1,7 +1,7 @@
 var express = require('express')
-  , fetcher = require('./fetcher')
-  , writer = require('./writer')
-  , dataServiceInitializer = require('./data')
+  , fetcher = require('./lib/fetcher')
+  , writer = require('./lib/writer')
+  , dataServiceInitializer = require('./lib/data')
   , app = express()
   , port = process.env.PORT || 8080
   , host = process.env.BASE_URI || 'http://localhost'
