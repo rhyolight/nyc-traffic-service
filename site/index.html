@@ -4,3 +4,25 @@ template: main.hbt
 class: traffic
 ---
 
+<div id="traffic-chart"></div>
+
+<script type="text/javascript">
+    $(function() {
+
+        function dataToCsv(data) {
+            var out = '';
+            data.path.forEach(function(path) {
+                // "DataAsOf":"6/5/2015 20:30:00",
+                // "TravelTime":348,
+                out += path.DataAsOf + ',' + path.TravelTime + '\n';
+            });
+            return out;
+        }
+
+        $.getJSON('/1', function(data) {
+            console.log(data);
+            var csv = dataToCsv(data);
+            new Dygraph(document.getElementById("traffic-chart"), csv);
+        });
+    });
+</script>
