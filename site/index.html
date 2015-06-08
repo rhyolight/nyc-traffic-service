@@ -32,10 +32,15 @@ class: traffic
                 _.each(allPathData, function(data, id) {
                     var csv = dataToCsv(data)
                       , onePoint = data.path[0]
-                      , elId = 'traffic-path-' + id;
+                      , elId = 'traffic-path-' + id
+                      , titleHtml;
                     $body.append('<div id="' + elId + '"></div>');
+                    titleHtml = onePoint.linkName + ' ('
+                            + onePoint.Borough + ')<br/>'
+                            + '<a href="/' + id + '" target="_blank">Path ' + id
+                            + ' Raw Data</a>';
                     new Dygraph(document.getElementById(elId), csv, {
-                        title: onePoint.linkName + ' (' + onePoint.Borough + ')'
+                        title: titleHtml
                       , ylabel: 'Speed'
                       , xlabel: 'Time'
                       , width: 800
