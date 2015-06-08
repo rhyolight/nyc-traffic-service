@@ -47,7 +47,7 @@ dataServiceInitializer(function(connectionError, requestHandler) {
     }
     buildStaticSite();
     app.use(express.static('build'));
-    app.use('/:trafficRoute', requestHandler);
+    app.use('/:trafficRoute*', requestHandler);
     app.listen(config.port, function(error) {
         if (error) return console.error(error);
         console.log('%s:%s', config.host, config.port);
