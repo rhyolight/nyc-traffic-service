@@ -3,15 +3,16 @@ var express = require('express')
   , writer = require('./lib/writer')
   , buildStaticSite = require('./lib/smithy')
   , dataServiceInitializer = require('./lib/data')
+  , config = require('./lib/config')
   , app = express()
-  , port = process.env.PORT || 8080
-  , host = process.env.BASE_URI || 'http://localhost'
   ;
 
 // Fail fast.
 if (! process.env.REDIS_URL) {
     throw new Error('Missing environment variable REDIS_URL.');
 }
+
+console.log(config);
 
 // We initialize the redis writer first.
 writer.initialize(function(connectionError) {
@@ -31,8 +32,6 @@ writer.initialize(function(connectionError) {
                 if (writeError) {
                     console.error('Error writing new traffic data:');
                     console.error(writeError);
-                } else {
-                    console.log('Wrote new traffic data.');
                 }
             });
         }
@@ -49,8 +48,8 @@ dataServiceInitializer(function(connectionError, requestHandler) {
     buildStaticSite();
     app.use(express.static('build'));
     app.use('/:trafficRoute', requestHandler);
-    app.listen(port, function(error) {
+    app.listen(config.port, function(error) {
         if (error) return console.error(error);
-        console.log('%s:%s', host, port);
+        console.log('%s:%s', config.host, config.port);
     });
 });
