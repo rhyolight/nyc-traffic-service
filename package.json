@@ -14,6 +14,7 @@
   "author": "Matthew Taylor",
   "license": "MIT",
   "dependencies": {
+    "async": "^1.2.1",
     "csv-parse": "^0.1.2",
     "express": "^4.12.4",
     "fs-extra": "^0.18.4",

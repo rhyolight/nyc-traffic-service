@@ -18,49 +18,22 @@ class: traffic
             return out;
         }
 
-        $.getJSON('/paths', function(data) {
-            _.each(data.pathIds, function(pathId) {
+        $.getJSON('/paths?includeDetails=1', function(data) {
+            _.each(data.paths, function(pathData, pathId) {
                 var csv = '/' + pathId + '.csv'
                   // , onePoint = data.path[0]
                   , elId = 'traffic-path-' + pathId
                   , titleHtml;
                 $body.append('<div id="' + elId + '"></div>');
-                titleHtml = '<a href="/' + pathId + '" target="_blank">Path ' + pathId
+                titleHtml = pathData.linkName + ' ('
+                        + pathData.Borough + ')<br/>'
+                        + '<a href="/' + pathId + '" target="_blank">Path ' + pathId
                         + ' Raw Data</a>';
                 new Dygraph(document.getElementById(elId), csv, {
                     title: titleHtml
                   , width: 800
                 });
             });
-            // var pathFetchers = {};
-            // _.each(data.pathIds, function(id) {
-            //     pathFetchers[id] = function(localCallback) {
-            //         $.getJSON('/' + id, function(pathData) {
-            //             allPathData[id] = pathData;
-            //             localCallback();
-            //         });
-            //     };
-            // });
-            // async.parallel(pathFetchers, function(error) {
-            //     _.each(allPathData, function(data, id) {
-            //         var csv = dataToCsv(data)
-            //           , onePoint = data.path[0]
-            //           , elId = 'traffic-path-' + id
-            //           , titleHtml;
-            //         $body.append('<div id="' + elId + '"></div>');
-            //         titleHtml = onePoint.linkName + ' ('
-            //                 + onePoint.Borough + ')<br/>'
-            //                 + '<a href="/' + id + '" target="_blank">Path ' + id
-            //                 + ' Raw Data</a>';
-            //         new Dygraph(document.getElementById(elId), csv, {
-            //             title: titleHtml
-            //           , ylabel: 'Speed'
-            //           , xlabel: 'Time'
-            //           , width: 800
-            //         });
-            //     });
-
-            // });
         });
 
 
