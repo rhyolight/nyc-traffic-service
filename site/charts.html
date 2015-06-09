@@ -25,10 +25,11 @@ class: traffic
                   , elId = 'traffic-path-' + pathId
                   , titleHtml;
                 $body.append('<div id="' + elId + '"></div>');
-                titleHtml = pathData.linkName + ' ('
-                        + pathData.Borough + ')<br/>'
-                        + '<a href="/' + pathId + '" target="_blank">Path ' + pathId
-                        + ' Raw Data</a>';
+                titleHtml = '<a href="#' + elId +  '">'
+                    + pathData.linkName + ' ('
+                    + pathData.Borough + ')</a><br/>'
+                    + '<a href="/' + pathId + '" target="_blank">Path ' + pathId
+                    + ' Raw Data</a>';
                 new Dygraph(document.getElementById(elId), csv, {
                     title: titleHtml
                   , width: 800
