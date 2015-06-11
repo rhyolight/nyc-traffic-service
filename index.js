@@ -32,6 +32,8 @@ writer.initialize(function(connectionError) {
                 if (writeError) {
                     console.error('Error writing new traffic data:');
                     console.error(writeError);
+                } else {
+                    console.log('Write completed at %s', new Date().toString());
                 }
             });
         }
