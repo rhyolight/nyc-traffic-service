@@ -46,28 +46,35 @@ Returns a sorted list of paths, ascending by date. For example, assuming there i
 {
     "path":[
         {
-            "Id":1,
-            "Speed":19.88,
-            "TravelTime":267,
-            "DataAsOf":"6/8/2015 00:12:54",
-            "linkPoints":"40.74047,-74.009251 40.74137,-74.00893 40.7431706,-74.008591 40.7462304,-74.00797 40.74812,-74.007651 40.748701,-74.007691 40.74971,-74.00819 40.75048,-74.008321 40.751611,-74.00789 40.7537504,-74.00704 40.75721,-74.00463 40.76003,-74.002631 40.7607405,-7",
-            "Borough":"Manhattan",
-            "linkName":"11th ave n ganservoort - 12th ave @ 40th st"
+            "Speed":19.26,
+            "TravelTime":275,
+            "DataAsOf":"2015-06-08T00:30:54.000Z"
         },
         ...
         {
-            "Id":1,
-            "Speed":8.7,
-            "TravelTime":597,
-            "DataAsOf":"6/9/2015 12:38:55",
-            "linkPoints":"40.74047,-74.009251 40.74137,-74.00893 40.7431706,-74.008591 40.7462304,-74.00797 40.74812,-74.007651 40.748701,-74.007691 40.74971,-74.00819 40.75048,-74.008321 40.751611,-74.00789 40.7537504,-74.00704 40.75721,-74.00463 40.76003,-74.002631 40.7607405,-7",
-            "Borough":"Manhattan",
-            "linkName":"11th ave n ganservoort - 12th ave @ 40th st"
+            "Speed":6.84,
+            "TravelTime":768,
+            "DataAsOf":"2015-06-11T12:06:58.000Z"
         }
     ],
-    "count":75
+    "properties":{
+        "Borough":"Manhattan",
+        "Status":"0",
+        "Transcom_id":"4616337",
+        "EncodedPolyLine":"}btwFx|ubMsD_AgJcAcR{ByJ_AsBFiEbByCXaFuAkLiDsTaNsPoKmCmB",
+        "Id":"1",
+        "linkPoints":"40.74047,-74.009251 40.74137,-74.00893 40.7431706,-74.008591 40.7462304,-74.00797 40.74812,-74.007651 40.748701,-74.007691 40.74971,-74.00819 40.75048,-74.008321 40.751611,-74.00789 40.7537504,-74.00704 40.75721,-74.00463 40.76003,-74.002631 40.7607405,-7",
+        "EncodedPolyLineLvls":"BBBBBBBBBBBBB",
+        "linkId":"4616337",
+        "DataAsOf":"6/11/2015 12:06:58",
+        "Owner":"NYC_DOT_LIC",
+        "linkName":"11th ave n ganservoort - 12th ave @ 40th st"
+    },
+    "count":465
 }
 ```
+
+The `path` array lists the speed and travel time across the traffic route at a specific time. The `properties` object contains static properties for the traffic route (`DataAsOf` is the last known data point).
 
 #### Filtering by Date
 

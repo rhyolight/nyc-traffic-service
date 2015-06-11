@@ -8,7 +8,9 @@ class: traffic
     $(function() {
 
         var $body = $('div#main')
-          , allPathData = {};
+          , docWidth = $(document).width()
+          , allPathData = {}
+          , graphs = [];
 
         function dataToCsv(data) {
             var out = '';
@@ -21,23 +23,21 @@ class: traffic
         $.getJSON('/paths?includeDetails=1', function(data) {
             _.each(data.paths, function(pathData, pathId) {
                 var csv = '/' + pathId + '.csv'
-                  // , onePoint = data.path[0]
                   , elId = 'traffic-path-' + pathId
                   , titleHtml;
-                $body.append('<div id="' + elId + '"></div>');
+                $body.append('<div id="' + elId + '" class="chart"></div>');
                 titleHtml = '<a href="#' + elId +  '">'
                     + pathData.linkName + ' ('
                     + pathData.Borough + ')</a><br/>'
                     + '<a href="/' + pathId + '" target="_blank">Path ' + pathId
                     + ' Raw Data</a>';
-                new Dygraph(document.getElementById(elId), csv, {
+                graphs.push(new Dygraph(document.getElementById(elId), csv, {
                     title: titleHtml
-                  , width: 800
+                  , width: docWidth * 0.9
                   , Speed: { axis: { } }
-                });
+                }));
             });
         });
-
 
     });
 </script>
