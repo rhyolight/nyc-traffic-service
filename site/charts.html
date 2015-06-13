@@ -22,7 +22,7 @@ class: traffic
 
         $.getJSON('/paths?includeDetails=1', function(data) {
             _.each(data.paths, function(pathData, pathId) {
-                var csv = '/' + pathId + '.csv'
+                var csv = '/' + pathId + '.csv?limit=250'
                   , elId = 'traffic-path-' + pathId
                   , titleHtml;
                 $body.append('<div id="' + elId + '" class="chart"></div>');
