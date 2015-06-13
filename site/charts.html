@@ -22,7 +22,7 @@ class: traffic
 
         $.getJSON('/paths?includeDetails=1', function(data) {
             _.each(data.paths, function(pathData, pathId) {
-                var csv = '/' + pathId + '.csv?limit=250'
+                var csv = '/' + pathId + '.csv?exclude=TravelTime'
                   , elId = 'traffic-path-' + pathId
                   , titleHtml;
                 $body.append('<div id="' + elId + '" class="chart"></div>');
@@ -34,7 +34,6 @@ class: traffic
                 graphs.push(new Dygraph(document.getElementById(elId), csv, {
                     title: titleHtml
                   , width: docWidth * 0.9
-                  , Speed: { axis: { } }
                 }));
             });
         });
