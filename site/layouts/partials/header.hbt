@@ -28,7 +28,8 @@
     <script src="{{baseurl}}/bower_components/async/lib/async.js"></script>
     <script src="{{baseurl}}/bower_components/dygraphs/dygraph-combined.js"></script>
 
-
+    <!-- This costs performance -->
+    <!-- <script src="{{baseurl}}/bower_components/dygraphs/extras/synchronizer.js"></script> -->
 
   </head>
   <body>
